@@ -19,11 +19,13 @@ def createDB():
     try:
         dbcur.execute(query)
         Dbcon.commit()
+        print("Database %s was created." %(MYSQL_DBNAME))
     except:
         Dbcon.rollback()
         print(query)
         print("SQL statement Error")
     dbcur.close()
+
 
 # pull zip file from online
 def Pull(url):
@@ -42,7 +44,11 @@ def getCSVfilelist(dir):
     return os.listdir(dir)
 
 
-def splistCSV(filepath):
+"""
+    def : SplitCSV
+    split big csv to small csv files each has 100000 rows
+"""
+def splitCSV(filepath):
     ### delete temp files and create new temp files
     dirName = 'temp'
     if os.path.isdir(dirName):
@@ -51,7 +57,7 @@ def splistCSV(filepath):
 
     names = []
     name = 0
-    with open(filepath, "r") as f:  #ipgold-offline/IPGOLD202.csv
+    with open(filepath, "r") as f:
         file = open(dirName + "/" + str(name), 'a')
         names.append(dirName + "/" + str(name))
         cnt = 0
@@ -67,7 +73,8 @@ def splistCSV(filepath):
         file.close()
     return names
 
-# store csv data to mysql
+
+# Unit to store splitted file data to mysql
 def CSVtoDB_Unit(file, model):
     model.creatTable()
     model.setfilepath(file)
@@ -76,7 +83,7 @@ def CSVtoDB_Unit(file, model):
 # store csv data to mysql
 def CSVtoDB(dir,file, model):
     # filepath = project_path + "\{0}\{1}".format(dir, file)
-    names = splistCSV("./{0}/{1}".format(dir, file))
+    names = splitCSV("./{0}/{1}".format(dir, file))
     for name in names:
         print(name)
         print('\n%.3fs:' % (elapsed()))
@@ -84,24 +91,25 @@ def CSVtoDB(dir,file, model):
         model.isHeader = False
 
 if __name__ == "__main__":
-    print("Start at %s" % datetime.datetime.now())
+    print('\n%.3fs:' % (elapsed()))
+
     # crate db if not exist
     createDB()
     #create directory
     dirName = 'ipgold-offline'
-    # if not os.path.exists(dirName):
-    #     os.makedirs(dirName)
+    if not os.path.exists(dirName):
+        os.makedirs(dirName)
+    print("Start pulling file from website")
     ## pull zip file from url
-    # Pull(ZIP_URL)
-
+    Pull(ZIP_URL)
+    print("Finish pulling file from website")
     ## unzip zip file
-    # zipfileName = "ipgold-offline.zip"
-    # print("Extracting %s..." % (zipfileName))
-    # Unzip(zipfileName, dirName)
-    # print("Finish Extracting!")
+    zipfileName = "ipgold-offline.zip"
+    print("Extracting %s..." % (zipfileName))
+    Unzip(zipfileName, dirName)
+    print("Finish Extracting!")
 
-
-    print("Start process!")
+    print("Start processing!")
     csvlist = getCSVfilelist(dirName) #
     for csvf in csvlist:
         print("Storing {0} to mysql...".format(csvf))
@@ -130,4 +138,5 @@ if __name__ == "__main__":
             model = IPGOLD222()
         if model != None:
             CSVtoDB(dirName, csvf, model)
-    print("Ended at %s" % datetime.datetime.now())
+    print("End processing!")
+    print('\n%.3fs : Total spent time' % (elapsed()))

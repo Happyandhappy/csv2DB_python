@@ -12,11 +12,6 @@ class Model():
         self.Query1 = ""
         self.Query2 = ""
         self.isHeader = True
-    # set Text value
-    def set(self, values):
-        self.values = values
-        self.reformat()
-        self.getValues()
 
     def setQuery(self, query1, query2):
         self.Query1 = query1
@@ -45,25 +40,6 @@ class Model():
         for i in range(len(self.values)):
             self.values[i] = self.Dbcon.escape_string(self.values[i].replace('"','').replace('\n','').replace("'","''"))
 
-    # get Date from text
-    def getDate(self, text):
-        try:
-            return datetime.datetime.strptime(text, "%Y-%m-%d").strftime("%Y-%m-%d")
-        except:
-            print(text)
-            return '0000-00-00'
-
-    # get values from text
-    def getValues(self):
-        for i in range(0, len(self.types)):
-            if 'INT' in self.types[i] or 'DOUBLE' in self.types[i]:
-                if self.values[i]=='':self.values[i]='0'
-                self.values[i]= float(self.values[i].strip())
-            elif 'DATE' in self.types[i]:
-                self.values[i] = self.getDate(self.values[i])
-
-
-
     # create a table from header of csv
     def creatTable(self):
         # check if table is existed or not
@@ -89,47 +65,6 @@ class Model():
             return True
         dbcur.close()
         return False
-    # save model to db
-    def save(self):
-
-        # check duplicate id
-        dbcur = self.Dbcon.cursor()
-        dbcur.execute(
-            """SELECT COUNT(*) FROM `%s` WHERE `TM_NUMBER` = %s LIMIT 1""" %(self.Name, self.values[0])
-        )
-        #check values
-        for i in range(len(self.fields)):
-            if 'INT' in self.types[i]:
-                try:
-                    value = self.values[i]
-                except:
-                    self.values.insert(i, 0)
-            else:
-                try:
-                    value = self.values[i]
-                except:
-                    self.values.insert(i,'')
-
-        if not dbcur.fetchone()[0]:
-            query = """INSERT into `%s` ( %s ) VALUES (""" % (self.Name, ",".join(self.fields))
-            for i in range(len(self.fields)):
-                if 'INT' in self.types[i]:
-                    query += """%s,"""%(self.values[i])
-                else:
-                    query += """'%s',"""%(self.values[i])
-            query = query[0:len(query)-1] + ')'
-        else:
-            query = """UPDATE `%s` SET """ %(self.Name)
-
-            for i in range(1, len(self.fields)):
-                if 'INT' in self.types[i]:
-                    query += """`%s`= %s,""" % (self.fields[i], self.values[i])
-                else:
-                    query += """`%s`= '%s',""" % (self.fields[i],self.values[i])
-            query = query[0:len(query)-1] + """ where `TM_NUMBER`=%s""" % (self.values[0])
-        dbcur.close()
-        # run query
-        self.runQuery(query)
 
 
 class IPGOLD201(Model):
