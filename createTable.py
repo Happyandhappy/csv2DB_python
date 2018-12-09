@@ -30,7 +30,7 @@ def createDB():
 # pull zip file from online
 def Pull(url):
     r = requests.get(url)
-    z = zipfile.ZipFile(io.BytesIO(r.content))
+    # z = zipfile.ZipFile(io.BytesIO(r.content))
     with open('ipgold-offline.zip', 'wb') as fh:
         fh.write(r.content)
 

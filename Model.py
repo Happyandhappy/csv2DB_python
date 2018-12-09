@@ -66,7 +66,6 @@ class Model():
         dbcur.close()
         return False
 
-
 class IPGOLD201(Model):
 
     def __init__(self):
@@ -105,7 +104,7 @@ class IPGOLD201(Model):
         ]
     def setfilepath(self, path):
         path = path.replace('\\','//')
-        query1 = r"""LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD201` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' REPLACE 1 LINES;""" % (path)
+        query1 = r"""LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD201` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;""" % (path)
         query2 = r"""LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD201` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n';""" % (path)
         super(IPGOLD201, self).setQuery(query1=query1, query2=query2)
 
@@ -167,7 +166,7 @@ class IPGOLD202(Model):
         ]
     def setfilepath(self, path):
         path = path.replace('\\', '//')
-        query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD202` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' REPLACE 1 LINES""" % (path)
+        query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD202` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES""" % (path)
         query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD202` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n'""" % (path)
         super(IPGOLD202, self).setQuery(query1=query1, query2=query2)
 class IPGOLD203(Model):
@@ -256,7 +255,7 @@ class IPGOLD203(Model):
         ]
     def setfilepath(self, path):
         path = path.replace('\\', '//')
-        query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD203` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' REPLACE 1 LINES""" % (path)
+        query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD203` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES""" % (path)
         query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD203` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'""" % (path)
         super(IPGOLD203, self).setQuery(query1=query1, query2=query2)
 
