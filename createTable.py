@@ -3,7 +3,10 @@ import os, sys, shutil, time
 import zipfile
 import requests, io, datetime
 from config import *
-import csv
+import warnings
+warnings.filterwarnings("ignore")
+if (sys.argv.__len__() == 1):
+        sys.argv.append('-W ignore')
 
 project_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -30,7 +33,6 @@ def createDB():
 # pull zip file from online
 def Pull(url):
     r = requests.get(url)
-    # z = zipfile.ZipFile(io.BytesIO(r.content))
     with open('ipgold-offline.zip', 'wb') as fh:
         fh.write(r.content)
 
@@ -101,12 +103,12 @@ if __name__ == "__main__":
         os.makedirs(dirName)
     print("Start pulling file from website")
     ## pull zip file from url
-    Pull(ZIP_URL)
+    # Pull(ZIP_URL)
     print("Finish pulling file from website")
     ## unzip zip file
-    zipfileName = "ipgold-offline.zip"
-    print("Extracting %s..." % (zipfileName))
-    Unzip(zipfileName, dirName)
+    # zipfileName = "ipgold-offline.zip"
+    # print("Extracting %s..." % (zipfileName))
+    # Unzip(zipfileName, dirName)
     print("Finish Extracting!")
 
     print("Start processing!")
@@ -140,3 +142,5 @@ if __name__ == "__main__":
             CSVtoDB(dirName, csvf, model)
     print("End processing!")
     print('\n%.3fs : Total spent time' % (elapsed()))
+    if os.path.isdir('temp'):
+        shutil.rmtree('temp')

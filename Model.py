@@ -1,6 +1,5 @@
 from config import *
 import pymysql
-import datetime
 
 class Model():
     def __init__(self, name):
@@ -44,10 +43,15 @@ class Model():
     def creatTable(self):
         # check if table is existed or not
         if not self.checkTableExists(self.Name):
-            query = """CREATE TABLE `%s` ( `%s` int(10) NOT NULL,""" %(self.Name, self.fields[0])
+            query = """CREATE TABLE `%s` ( `%s` int(10) NOT NULL,""" % (self.Name, self.fields[0])
             for i in range(1, len(self.fields)):
-                query += "`%s` %s,"% (self.fields[i], self.types[i])
-            query += """PRIMARY KEY (`%s`) ) ENGINE=InnoDB DEFAULT CHARSET=latin1;""" % (self.fields[0])
+                query += "`%s` %s," % (self.fields[i], self.types[i])
+            if self.Name == 'IPGOLD204' or self.Name == 'IPGOLD202' or self.Name == 'IPGOLD207' or self.Name == 'IPGOLD208':
+                query += """PRIMARY KEY (`%s`, `%s`, `%s`) ) ENGINE=InnoDB DEFAULT CHARSET=latin1;""" % (self.fields[0], self.fields[1], self.fields[2])
+            elif self.Name == 'IPGOLD220':
+                query += """PRIMARY KEY (`%s`, `%s`) ) ENGINE=InnoDB DEFAULT CHARSET=latin1;""" % (self.fields[0], self.fields[1])
+            else:
+                query += """PRIMARY KEY (`%s`) ) ENGINE=InnoDB DEFAULT CHARSET=latin1;""" % (self.fields[0])
             # create table with name
             self.runQuery(query)
 
@@ -104,8 +108,8 @@ class IPGOLD201(Model):
         ]
     def setfilepath(self, path):
         path = path.replace('\\','//')
-        query1 = r"""LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD201` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;""" % (path)
-        query2 = r"""LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD201` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n';""" % (path)
+        query1 = r"""LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD201` FIELDS TERMINATED BY ','  optionally enclosed by '"'  LINES TERMINATED BY '\n' IGNORE 1 LINES;""" % (path)
+        query2 = r"""LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD201` FIELDS TERMINATED BY ','  optionally enclosed by '"'  LINES TERMINATED BY '\n';""" % (path)
         super(IPGOLD201, self).setQuery(query1=query1, query2=query2)
 
 class IPGOLD202(Model):
@@ -166,8 +170,8 @@ class IPGOLD202(Model):
         ]
     def setfilepath(self, path):
         path = path.replace('\\', '//')
-        query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD202` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES""" % (path)
-        query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD202` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n'""" % (path)
+        query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD202` FIELDS TERMINATED BY ',' optionally enclosed by '"' LINES TERMINATED BY '\n' IGNORE 1 LINES""" % (path)
+        query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD202` FIELDS TERMINATED BY ',' optionally enclosed by '"' LINES TERMINATED BY '\n'""" % (path)
         super(IPGOLD202, self).setQuery(query1=query1, query2=query2)
 class IPGOLD203(Model):
     def __init__(self):
@@ -304,8 +308,8 @@ class IPGOLD206(Model):
         ]
     def setfilepath(self, path):
         path = path.replace('\\', '//')
-        query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD206` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES""" % (path)
-        query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD206` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n'""" % (path)
+        query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD206` FIELDS TERMINATED BY ','  optionally enclosed by '"'  LINES TERMINATED BY '\n' IGNORE 1 LINES""" % (path)
+        query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD206` FIELDS TERMINATED BY ','  optionally enclosed by '"'  LINES TERMINATED BY '\n'""" % (path)
         super(IPGOLD206, self).setQuery(query1=query1, query2=query2)
 
 class IPGOLD207(Model):
