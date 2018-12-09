@@ -1,0 +1,5 @@
+MYSQL_HOST = "localhost"
+MYSQL_USER = "root"
+MYSQL_PASS = ""
+MYSQL_DBNAME = "csv_table"
+ZIP_URL = "https://data.gov.au/dataset/0404b1be-5304-461b-b500-d58707ccf9ed/resource/9050618b-c880-4bfe-9aa9-a002837f5067/download/ipgold.zip"

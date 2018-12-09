@@ -1,0 +1,126 @@
+DROP TABLE IF EXISTS `ipgold220`;
+
+CREATE TABLE `ipgold220` (
+  `TM_NUMBER` int(10) NOT NULL AUTO_INCREMENT,
+  `CI_NUMBER` int(10) DEFAULT NULL,
+  `APPROVAL_DATE` date DEFAULT NULL,
+  `CI_TEXT` text,
+  `HEADER_TM_CASE_NO` int(10) DEFAULT NULL,
+  `LAST_AMEND_DATE` date DEFAULT NULL,
+  PRIMARY KEY (`TM_NUMBER`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+SELECT COUNT(*) FROM `text` WHERE `TM_NUMBER`=1
+
+
+For IPGOLD201.CSV file
+
+LOAD DATA LOCAL INFILE 'C:\\Users\\3_Rojonghyok\\Documents\\csv\\IPGOLD201.csv'
+INTO TABLE `IPGOLD201`
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(@tm_number,type_of_mark_code,cpi_status_code,live_or_dead_code,trademark_type,madrid_application_indicator,lodgement_date,registered_from_date,country,@Australian,@entity,@applicant_no,@lodgement_year,@registered_from_year) SET tm_number = CAST(@tm_number AS UNSIGNED), Australian = CAST(@Australian AS UNSIGNED), entity=CAST(@entity AS UNSIGNED), applicant_no=CAST(@applicant_no AS UNSIGNED), lodgement_year=CAST(@lodgement_year AS UNSIGNED), registered_from_year=CAST(@registered_from_year AS UNSIGNED);
+
+
+
+
+For IPGOLD202.csv file
+
+LOAD DATA LOCAL INFILE 'C:\\Users\\3_Rojonghyok\\Documents\\csv\\IPGOLD202.csv'
+INTO TABLE `IPGOLD202`
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+
+
+
+For IPGOLD203.csv file
+
+LOAD DATA LOCAL INFILE 'F:\\work\\pythonworks\\upwork_projects\\createdbFromcsv\\IPGOLD203.csv'
+INTO TABLE `IPGOLD203`
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+
+
+
+2004.csv
+Insert
+
+LOAD DATA LOCAL INFILE 'F:\\work\\pythonworks\\upwork_projects\\createdbFromcsv\\IPGOLD204.csv'
+INTO TABLE `IPGOLD204`
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(@tm_number,
+ @class_code,
+ @occ_num,
+ description_text
+ )
+SET tm_number = CAST(@tm_number AS UNSIGNED),
+	class_code = CAST(@class_code AS UNSIGNED),
+	occ_num = CAST(@occ_num AS UNSIGNED);
+
+
+Update
+
+LOAD DATA LOCAL INFILE 'F:\\work\\pythonworks\\upwork_projects\\createdbFromcsv\\IPGOLD204.csv'
+replace
+INTO TABLE `IPGOLD204`
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(@tm_number,
+ @class_code,
+ @occ_num,
+ description_text
+ )
+SET tm_number = CAST(@tm_number AS UNSIGNED),
+	class_code = CAST(@class_code AS UNSIGNED),
+	occ_num = CAST(@occ_num AS UNSIGNED);
+
+
+2006.csv
+LOAD DATA LOCAL INFILE 'C:\\Users\\3_Rojonghyok\\Documents\\csv\\IPGOLD206.csv'
+INTO TABLE `IPGOLD206`
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+
+
+207.csv
+LOAD DATA LOCAL INFILE 'F:\\work\\pythonworks\\upwork_projects\\createdbFromcsv\\IPGOLD207.csv'
+INTO TABLE `IPGOLD207`
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+208.csv
+LOAD DATA LOCAL INFILE 'F:\\work\\pythonworks\\upwork_projects\\createdbFromcsv\\IPGOLD208.csv'
+INTO TABLE `IPGOLD208`
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+220.csv
+LOAD DATA LOCAL INFILE 'F:\\work\\pythonworks\\upwork_projects\\createdbFromcsv\\IPGOLD220.csv'
+INTO TABLE `IPGOLD220`
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+221.csv
+LOAD DATA LOCAL INFILE 'F:\\work\\pythonworks\\upwork_projects\\createdbFromcsv\\IPGOLD221.csv'
+INTO TABLE `IPGOLD221`
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+222.csv
+LOAD DATA LOCAL INFILE 'F:\\work\\pythonworks\\upwork_projects\\createdbFromcsv\\IPGOLD222.csv'
+INTO TABLE `IPGOLD222`
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
