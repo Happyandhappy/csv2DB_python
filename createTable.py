@@ -59,13 +59,13 @@ def splitCSV(filepath):
 
     names = []
     name = 0
-    with open(filepath, "r") as f:
+    with open(filepath, "r", encoding='utf-8',) as f:
         file = open(dirName + "/" + str(name), 'a')
         names.append(dirName + "/" + str(name))
         cnt = 0
         for line in f:
             cnt += 1
-            file.write(line)
+            file.write(str(line))
             if cnt > 100000:
                 cnt = 0
                 name += 1
@@ -79,7 +79,7 @@ def splitCSV(filepath):
 # Unit to store splitted file data to mysql
 def CSVtoDB_Unit(file, model):
     model.creatTable()
-    model.setfilepath(file)
+    model.setfilepath(project_path + "/" + file)
     model.importCSV()
 
 # store csv data to mysql
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     # Pull(ZIP_URL)
     print("Finish pulling file from website")
     ## unzip zip file
-    # zipfileName = "ipgold-offline.zip"
+    zipfileName = "ipgold-offline.zip"
     # print("Extracting %s..." % (zipfileName))
     # Unzip(zipfileName, dirName)
     print("Finish Extracting!")

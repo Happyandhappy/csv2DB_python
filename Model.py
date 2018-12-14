@@ -107,7 +107,8 @@ class IPGOLD201(Model):
             'registered_from_year'
         ]
     def setfilepath(self, path):
-        path = path.replace('\\','//')
+        path = path.replace('\\','/')
+        print(path)
         query1 = r"""LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD201` FIELDS TERMINATED BY ','  optionally enclosed by '"'  LINES TERMINATED BY '\n' IGNORE 1 LINES;""" % (path)
         query2 = r"""LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD201` FIELDS TERMINATED BY ','  optionally enclosed by '"'  LINES TERMINATED BY '\n';""" % (path)
         super(IPGOLD201, self).setQuery(query1=query1, query2=query2)
@@ -169,9 +170,9 @@ class IPGOLD202(Model):
             "big"
         ]
     def setfilepath(self, path):
-        path = path.replace('\\', '//')
-        query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD202` FIELDS TERMINATED BY ',' optionally enclosed by '"' LINES TERMINATED BY '\n' IGNORE 1 LINES""" % (path)
-        query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD202` FIELDS TERMINATED BY ',' optionally enclosed by '"' LINES TERMINATED BY '\n'""" % (path)
+        path = path.replace('\\', '/')
+        query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD202` FIELDS TERMINATED BY ',' optionally enclosed by '"' LINES TERMINATED BY '\n' IGNORE 1 LINES;""" % (path)
+        query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD202` FIELDS TERMINATED BY ',' optionally enclosed by '"' LINES TERMINATED BY '\n';""" % (path)
         super(IPGOLD202, self).setQuery(query1=query1, query2=query2)
 class IPGOLD203(Model):
     def __init__(self):
@@ -258,7 +259,7 @@ class IPGOLD203(Model):
             'madrid_application_indicator'
         ]
     def setfilepath(self, path):
-        path = path.replace('\\', '//')
+        path = path.replace('\\', '/')
         query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD203` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES""" % (path)
         query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD203` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'""" % (path)
         super(IPGOLD203, self).setQuery(query1=query1, query2=query2)
@@ -279,9 +280,9 @@ class IPGOLD204(Model):
             'description_text'
         ]
     def setfilepath(self, path):
-        path = path.replace('\\', '//')
+        path = path.replace('\\', '/')
         query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD204` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES""" % (path)
-        query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD204` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES""" % (path)
+        query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD204` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' """ % (path)
         super(IPGOLD204, self).setQuery(query1=query1, query2=query2)
 
 class IPGOLD206(Model):
@@ -307,7 +308,7 @@ class IPGOLD206(Model):
             'firm_id'
         ]
     def setfilepath(self, path):
-        path = path.replace('\\', '//')
+        path = path.replace('\\', '/')
         query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD206` FIELDS TERMINATED BY ','  optionally enclosed by '"'  LINES TERMINATED BY '\n' IGNORE 1 LINES""" % (path)
         query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD206` FIELDS TERMINATED BY ','  optionally enclosed by '"'  LINES TERMINATED BY '\n'""" % (path)
         super(IPGOLD206, self).setQuery(query1=query1, query2=query2)
@@ -327,7 +328,7 @@ class IPGOLD207(Model):
             'class_count'
         ]
     def setfilepath(self, path):
-        path = path.replace('\\', '//')
+        path = path.replace('\\', '/')
         query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD207` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES""" % (path)
         query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD207` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'""" % (path)
         super(IPGOLD207, self).setQuery(query1=query1, query2=query2)
@@ -461,7 +462,7 @@ class IPGOLD208(Model):
             'opp_evi_modified_date'
         ]
     def setfilepath(self, path):
-        path = path.replace('\\', '//')
+        path = path.replace('\\', '/')
         query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD208` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES""" % (path)
         query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD208` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'""" % (path)
         super(IPGOLD208, self).setQuery(query1=query1, query2=query2)
@@ -488,7 +489,7 @@ class IPGOLD220(Model):
             'last_amend_date'
         ]
     def setfilepath(self, path):
-        path = path.replace('\\', '//')
+        path = path.replace('\\', '/')
         query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD220` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES""" % (path)
         query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD220` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'""" % (path)
         super(IPGOLD220, self).setQuery(query1=query1, query2=query2)
@@ -509,7 +510,7 @@ class IPGOLD221(Model):
             'endorsement_type'
         ]
     def setfilepath(self, path):
-        path = path.replace('\\', '//')
+        path = path.replace('\\', '/')
         query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD221` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES""" % (path)
         query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD221` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'""" % (path)
         super(IPGOLD221, self).setQuery(query1=query1, query2=query2)
@@ -530,7 +531,7 @@ class IPGOLD222(Model):
         ]
 
     def setfilepath(self, path):
-        path = path.replace('\\', '//')
+        path = path.replace('\\', '/')
         query1 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD222` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES""" % (path)
         query2 = """LOAD DATA LOCAL INFILE '%s' REPLACE INTO TABLE `IPGOLD222` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'""" % (path)
         super(IPGOLD222, self).setQuery(query1=query1, query2=query2)
